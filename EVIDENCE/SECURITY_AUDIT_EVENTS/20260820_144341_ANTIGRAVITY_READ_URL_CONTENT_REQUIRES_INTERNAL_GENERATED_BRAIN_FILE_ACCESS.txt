@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T17:43:41Z
+
+Title:
+Antigravity read url content requires internal generated brain file access
+
+Component:
+Antigravity agent-b web research isolation
+
+Category:
+Runtime internal state isolation
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+A strict local-first web-order execution preserved the required local-first sequence but failed after read_url_content because Antigravity attempted to read its own system-generated content file under the persistent .gemini brain directory.
+
+
+EVIDENCE
+--------
+
+The execution read PROTOCOL, TASK, CONFIG, and LOG before any web operation. read_url_content targeted official Docker documentation, after which view_file attempted a .system_generated brain content.md path. The configured deny rule for /home/agy/.gemini blocked that internal read and terminal status became ERROR.
+
+
+SECURITY IMPACT
+---------------
+
+The local-first behavior was not violated, but the current persistent authentication volume also contains runtime brain state needed by some web operations. This creates unnecessary coupling between authentication state and transient research state.
+
+
+REMEDIATION
+-----------
+
+Overlay the Antigravity brain directory with an ephemeral tmpfs owned by the non-root agent user and permit reads only within that ephemeral brain path before performing the final third local-first web-order validation.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

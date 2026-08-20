@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T18:34:55Z
+
+Title:
+Antigravity ephemeral brain runtime isolation validated three times
+
+Component:
+Antigravity agent-b runtime state isolation
+
+Category:
+Ephemeral brain isolation
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The Antigravity ephemeral brain runtime design was validated in three independent executions using a persistent .gemini volume mounted read-only and an ephemeral writable tmpfs overlay for the Antigravity brain directory.
+
+
+EVIDENCE
+--------
+
+Valid test IDs were 5c487521, 7ee55be8, and e8fc74b1. In all three runs the persistent .gemini write probe was blocked, the brain tmpfs was writable, Docker and model-created brain artifacts did not persist after container exit, the model wrote and read the same dynamically selected Antigravity artifact path, required operation ordering was correct, no private persistent .gemini tool access was observed, no web operation occurred, no unexpected tool was used, terminal status was SUCCESS, and result.error was empty.
+
+
+SECURITY IMPACT
+---------------
+
+Transient Antigravity runtime artifacts can be separated from persistent OAuth state while keeping the persistent volume physically read-only and preserving required brain read/write functionality.
+
+
+REMEDIATION
+-----------
+
+Keep the persistent state volume read-only and the Antigravity brain path on ephemeral tmpfs. Validate persistent authentication read confidentiality as a separate boundary before final production approval.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

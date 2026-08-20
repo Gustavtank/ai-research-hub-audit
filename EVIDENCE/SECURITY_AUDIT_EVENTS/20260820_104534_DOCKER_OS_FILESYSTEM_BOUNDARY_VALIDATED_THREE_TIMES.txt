@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:45:34Z
+
+Title:
+Docker OS filesystem boundary validated three times
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Filesystem isolation
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The pure Docker filesystem boundary passed three independent tests with fresh synthetic directories and tokens.
+
+
+EVIDENCE
+--------
+
+In all three tests the outside control file was readable when explicitly mounted, the allowed file was readable through its read-only bind mount, and the outside file was inaccessible when not mounted.
+
+
+SECURITY IMPACT
+---------------
+
+The external Docker filesystem boundary is approved for the tested hardened container profile.
+
+
+REMEDIATION
+-----------
+
+Validate Antigravity read_file behavior inside the approved Docker boundary using only disposable authenticated state before mounting any AI_RESEARCH_HUB path.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

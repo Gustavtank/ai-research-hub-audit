@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:40:51Z
+
+Title:
+Disposable Antigravity state copy retained functional OAuth
+
+Component:
+Antigravity agent-b Docker authentication
+
+Category:
+Disposable test state
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The disposable copy of the authenticated Antigravity state volume successfully retained functional cloud authentication.
+
+
+EVIDENCE
+--------
+
+The disposable volume returned ExitCode 0, structured status SUCCESS and the exact expected response DISPOSABLE_AUTH_OK without any AI_RESEARCH_HUB mount.
+
+
+SECURITY IMPACT
+---------------
+
+Permission experiments can proceed on the disposable state without modifying the approved original authentication volume.
+
+
+REMEDIATION
+-----------
+
+Keep the original state untouched and delete the disposable state after filesystem-boundary testing is complete.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

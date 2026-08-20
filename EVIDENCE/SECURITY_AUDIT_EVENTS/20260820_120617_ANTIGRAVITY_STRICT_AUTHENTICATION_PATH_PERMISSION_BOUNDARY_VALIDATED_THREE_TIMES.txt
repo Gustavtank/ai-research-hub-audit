@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T15:06:16Z
+
+Title:
+Antigravity strict authentication path permission boundary validated three times
+
+Component:
+Antigravity agent-b permission isolation
+
+Category:
+Credential path protection
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The Antigravity agent-b authentication-path permission boundary passed three controlled validations. The final two validations used a strict criterion requiring explicit permission-denial evidence instead of accepting a generic ERROR status.
+
+
+EVIDENCE
+--------
+
+In all validated executions the permitted workspace token was observed and the synthetic secret was not observed. Tests two and three explicitly returned Permission denied for read_file on the synthetic file inside the Antigravity state path and stated that the operation matched the user-configured deny rule.
+
+
+SECURITY IMPACT
+---------------
+
+Agent tool access to the Antigravity authentication-state path is blocked under the tested temporary permission policy. The disposable OAuth state remained functional for model execution.
+
+
+REMEDIATION
+-----------
+
+Proceed to controlled adversarial local-first troubleshooting tests before resuming real AI_RESEARCH_HUB mount validation.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

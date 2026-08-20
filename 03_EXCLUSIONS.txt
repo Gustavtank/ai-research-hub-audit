@@ -1,0 +1,22 @@
+# Deliberately excluded from this external audit packet
+
+- Docker authentication/state volumes
+- Antigravity persistent .gemini content
+- antigravity-oauth-token
+- Codex auth.json
+- .env
+- .ssh
+- private keys / certificate private-key containers
+- Git credential files
+- browser profiles / cookies
+- AppData
+- RESEARCH/WORK
+- RESEARCH/RUNS
+- KNOWLEDGE
+- SOURCES
+- PROJECTS
+- GENERATED
+- binaries and files over 2 MB unless manually reviewed later
+
+# Generator exclusions
+BLOCKED_BY_POLICY | C:\AI_RESEARCH_HUB\SECURITY_AUDIT\EVENTS\20260820_084903_CONTROLLED_CREDENTIAL_SANITIZATION_TEST.txt

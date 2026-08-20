@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:47:46Z
+
+Title:
+Controlled personal path sanitization test
+
+Component:
+SECURITY_AUDIT writer
+
+Category:
+Sanitization
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+Profile username under test: <REDACTED_USERNAME>
+
+
+EVIDENCE
+--------
+
+Controlled path under test: %USERPROFILE%\Documents\SECURITY_TEST_ONLY.txt
+
+
+SECURITY IMPACT
+---------------
+
+This input intentionally contains local profile information for sanitization validation.
+
+
+REMEDIATION
+-----------
+
+Writer must replace username and profile path before persistence.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

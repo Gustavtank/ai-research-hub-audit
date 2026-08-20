@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:00:57Z
+
+Title:
+Antigravity read probe tool call schema identified
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Filesystem isolation investigation
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+The known external-read probe transcript contained exactly two structured tool calls.
+
+
+EVIDENCE
+--------
+
+Each tool call exposed a name field and an args object containing AbsolutePath, toolAction and toolSummary fields. No argument values or filesystem paths were displayed.
+
+
+SECURITY IMPACT
+---------------
+
+The schema suggests structured filesystem operations may have performed the reads, but the responsible tool is not yet confirmed.
+
+
+REMEDIATION
+-----------
+
+Inspect only tool_calls.name values and counts. Do not display arguments or paths.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

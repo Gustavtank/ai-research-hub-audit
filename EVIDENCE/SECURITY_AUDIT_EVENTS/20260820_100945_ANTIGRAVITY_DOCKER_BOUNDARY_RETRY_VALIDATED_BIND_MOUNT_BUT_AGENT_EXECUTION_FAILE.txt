@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:09:45Z
+
+Title:
+Antigravity Docker boundary retry validated bind mount but agent execution failed
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Filesystem isolation
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The allowed Docker bind mount was independently validated as readable, but the Antigravity execution exited with code 1 before demonstrating file access.
+
+
+EVIDENCE
+--------
+
+Direct container validation returned Mount ExitCode 0 and Mount readable True. The subsequent Antigravity run returned ExitCode 1 with neither the allowed nor outside synthetic token observed.
+
+
+SECURITY IMPACT
+---------------
+
+The Docker bind mount is functional, but filesystem isolation remains NOT_YET_VALIDATED because the agent execution failure has not yet been diagnosed.
+
+
+REMEDIATION
+-----------
+
+Repeat only the Antigravity execution and display sanitized stderr/stdout to identify the failure cause without exposing tokens or personal paths.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

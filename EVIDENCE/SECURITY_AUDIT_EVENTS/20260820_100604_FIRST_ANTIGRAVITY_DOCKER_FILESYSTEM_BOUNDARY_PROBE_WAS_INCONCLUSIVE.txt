@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:06:04Z
+
+Title:
+First Antigravity Docker filesystem boundary probe was inconclusive
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Filesystem isolation
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The first Docker filesystem-boundary probe returned neither the allowed synthetic token nor the outside synthetic token.
+
+
+EVIDENCE
+--------
+
+The container exited successfully, but Allowed token seen was False and Outside token seen was False. Because the permitted bind-mounted file was not demonstrated as readable, the result cannot validate or reject the Docker filesystem boundary.
+
+
+SECURITY IMPACT
+---------------
+
+Filesystem isolation remains NOT_YET_VALIDATED.
+
+
+REMEDIATION
+-----------
+
+Verify the allowed bind mount directly, then repeat the Antigravity probe with /work set explicitly as the container working directory.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

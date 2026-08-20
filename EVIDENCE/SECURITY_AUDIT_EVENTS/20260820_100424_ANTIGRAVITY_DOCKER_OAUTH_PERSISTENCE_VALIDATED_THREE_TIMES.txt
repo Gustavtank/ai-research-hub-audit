@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:04:24Z
+
+Title:
+Antigravity Docker OAuth persistence validated three times
+
+Component:
+Antigravity agent-b Docker authentication
+
+Category:
+Persistent authentication
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The private Antigravity Docker state volume successfully preserved functional authentication across three independent ephemeral container executions.
+
+
+EVIDENCE
+--------
+
+All three tests returned ExitCode 0, status SUCCESS, and the exact expected response PERSISTED_AUTH_OK. No AI_RESEARCH_HUB mount was used and no credential material was displayed.
+
+
+SECURITY IMPACT
+---------------
+
+The agent-b authentication volume is approved for continued isolated testing.
+
+
+REMEDIATION
+-----------
+
+Validate the external Docker filesystem boundary three times before exposing any AI_RESEARCH_HUB path.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

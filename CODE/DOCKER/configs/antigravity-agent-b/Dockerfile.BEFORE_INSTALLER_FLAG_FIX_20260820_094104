@@ -1,0 +1,26 @@
+FROM debian:bookworm-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        bash \
+        ca-certificates \
+        curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd \
+    --create-home \
+    --uid 1000 \
+    --shell /bin/bash \
+    agy
+
+USER agy
+WORKDIR /home/agy
+
+RUN curl -fsSL https://antigravity.google/cli/install.sh | \
+    bash -s -- --skip-path --skip-aliases
+
+ENV PATH="/home/agy/.local/bin:${PATH}"
+
+CMD ["agy", "--version"]

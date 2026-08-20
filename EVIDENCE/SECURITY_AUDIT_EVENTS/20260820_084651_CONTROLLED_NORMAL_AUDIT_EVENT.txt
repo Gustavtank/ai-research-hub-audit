@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:46:51Z
+
+Title:
+Controlled normal audit event
+
+Component:
+SECURITY_AUDIT writer
+
+Category:
+Audit tooling
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+Controlled event used to validate normal sanitized event creation.
+
+
+EVIDENCE
+--------
+
+No sensitive data was included in this test input.
+
+
+SECURITY IMPACT
+---------------
+
+No security impact. Test-only event.
+
+
+REMEDIATION
+-----------
+
+None required.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

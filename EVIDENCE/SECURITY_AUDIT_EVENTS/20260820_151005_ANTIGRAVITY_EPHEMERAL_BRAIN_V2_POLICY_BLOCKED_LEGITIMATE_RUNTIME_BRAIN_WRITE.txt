@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T18:10:05Z
+
+Title:
+Antigravity ephemeral brain V2 policy blocked legitimate runtime brain write
+
+Component:
+Antigravity agent-b runtime state isolation
+
+Category:
+Ephemeral brain permission policy
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+Ephemeral Brain Isolation V2 preserved the Docker filesystem boundary but one execution failed because the Antigravity permission policy denied a legitimate write_to_file operation inside the ephemeral brain tmpfs.
+
+
+EVIDENCE
+--------
+
+The persistent .gemini volume remained read-only, the brain tmpfs was writable at the Docker layer, the brain marker did not persist, and no private persistent .gemini read was attempted. Antigravity later invoked write_to_file for a system-generated validation_plan.md under the brain path. The structured terminal error explicitly reported a user-configured deny rule for write_file under /home/agy/.gemini.
+
+
+SECURITY IMPACT
+---------------
+
+The V2 policy is not robust enough for all observed Antigravity web-runtime branches. Repeated successful runs where the runtime happens not to write brain files would not justify approval.
+
+
+REMEDIATION
+-----------
+
+Create V3 with read and write permission explicitly allowed for the ephemeral brain path while the persistent .gemini state remains physically read-only through the Docker mount. Restart the three-run validation from zero for V3.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

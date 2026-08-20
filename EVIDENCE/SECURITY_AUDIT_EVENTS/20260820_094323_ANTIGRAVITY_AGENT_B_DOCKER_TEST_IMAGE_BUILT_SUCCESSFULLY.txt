@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:43:23Z
+
+Title:
+Antigravity agent-b Docker test image built successfully
+
+Component:
+Antigravity agent-b Docker build
+
+Category:
+Container build
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The corrected Antigravity agent-b Dockerfile built successfully after switching the Linux installer to the supported explicit installation directory option.
+
+
+EVIDENCE
+--------
+
+Dockerfile SHA256 is 2A67D721D5A3EC1551295649E27C328BC7D236DE8A6CE21FCB37A225ED0AD909. Build completed with ExitCode 0 and produced image ai-research-antigravity-agent-b:test.
+
+
+SECURITY IMPACT
+---------------
+
+The Antigravity CLI test image is available for isolated runtime validation. It is not yet approved for HUB access or authentication.
+
+
+REMEDIATION
+-----------
+
+Inspect image metadata and run agy --version three times with no mounts, no network, read-only root filesystem, dropped capabilities and no-new-privileges.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

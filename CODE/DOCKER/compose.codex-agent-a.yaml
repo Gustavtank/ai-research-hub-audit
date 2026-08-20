@@ -1,0 +1,50 @@
+name: ai-research-hub-codex
+
+services:
+
+  codex-agent-a:
+    image: ai-research-codex-agent-a:local
+    container_name: ai-research-codex-agent-a
+
+    working_dir: /hub/RESEARCH/WORK/agent-a
+
+    stdin_open: true
+    tty: true
+
+    read_only: true
+
+    cap_drop:
+      - ALL
+
+    security_opt:
+      - no-new-privileges:true
+
+    environment:
+      HOME: /home/codex
+      CODEX_HOME: /home/codex/.codex
+      XDG_CACHE_HOME: /tmp/.cache
+
+    tmpfs:
+      - /tmp
+
+    volumes:
+      - type: bind
+        source: C:/AI_RESEARCH_HUB
+        target: /hub
+        read_only: true
+
+      - type: bind
+        source: C:/AI_RESEARCH_HUB/RESEARCH/WORK/agent-a
+        target: /hub/RESEARCH/WORK/agent-a
+        read_only: false
+
+      - type: volume
+        source: codex-agent-a-home
+        target: /home/codex/.codex
+        read_only: false
+
+    command: ["sleep", "infinity"]
+
+volumes:
+  codex-agent-a-home:
+    external: true

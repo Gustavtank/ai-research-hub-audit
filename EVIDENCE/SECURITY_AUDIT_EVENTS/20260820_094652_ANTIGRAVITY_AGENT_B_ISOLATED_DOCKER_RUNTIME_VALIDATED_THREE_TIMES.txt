@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:46:52Z
+
+Title:
+Antigravity agent-b isolated Docker runtime validated three times
+
+Component:
+Antigravity agent-b Docker runtime
+
+Category:
+Container isolation
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The Antigravity CLI test image executed successfully in three consecutive hardened no-mount runtime tests.
+
+
+EVIDENCE
+--------
+
+Image ran as non-root user agy with read-only root filesystem, network disabled, all Linux capabilities dropped, no-new-privileges enabled, temporary /tmp, and zero host mounts. All three executions returned Antigravity CLI version 1.1.16 with ExitCode 0.
+
+
+SECURITY IMPACT
+---------------
+
+The base container runtime is suitable for the next authentication-readiness phase. This does not yet approve filesystem mounts or HUB access.
+
+
+REMEDIATION
+-----------
+
+Freeze the tested 1.1.16 image candidate and test headless authentication behavior without persistent credentials or HUB mounts.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

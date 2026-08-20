@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:22:38Z
+
+Title:
+Docker Desktop launcher path assumption failed
+
+Component:
+Docker runtime startup tooling
+
+Category:
+Environment discovery
+
+Status:
+ERROR
+
+
+SUMMARY
+-------
+
+The Docker Desktop startup helper aborted because Docker Desktop.exe was not present in either of the two assumed installation paths.
+
+
+EVIDENCE
+--------
+
+No executable was found at the tested Program Files or LocalAppData candidate paths. No Docker component was modified.
+
+
+SECURITY IMPACT
+---------------
+
+Docker Desktop may still be installed through another path or launcher mechanism. Installation state must be discovered before remediation.
+
+
+REMEDIATION
+-----------
+
+Perform read-only discovery using Docker CLI capabilities, Start Menu registration, Windows registry metadata, services and running processes.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

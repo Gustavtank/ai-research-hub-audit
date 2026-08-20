@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:57:58Z
+
+Title:
+Antigravity internal storage discovery and official documentation inconsistency
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Security architecture
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Metadata-only discovery found 89 internal state candidates, primarily transcripts, conversation databases and logs. No explicit security-policy store was identified.
+
+
+EVIDENCE
+--------
+
+No candidate content was opened. Official Antigravity documentation states that settings.json uses sparse persistence, so absent security keys may represent defaults. Official documentation also currently contains conflicting descriptions of Windows terminal sandbox availability.
+
+
+SECURITY IMPACT
+---------------
+
+Filesystem isolation remains NOT_YET_VALIDATED. Internal databases should not be treated as policy stores without evidence.
+
+
+REMEDIATION
+-----------
+
+Stop probing conversation databases and inspect only sanitized execution metadata from the known read-probe transcript to identify whether external access used a file tool or terminal command.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

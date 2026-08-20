@@ -1,0 +1,209 @@
+AI_RESEARCH_HUB - CURRENT SECURITY STATE
+========================================
+
+Snapshot UTC:
+2026-08-20T11:42:09Z
+
+
+1. CODEX / AGENT-A
+------------------
+
+[CONFIRMED]
+
+Codex agent-a currently uses an external Docker isolation boundary.
+
+Observed protections include:
+
+- HUB mounted read-only by default
+- only RESEARCH/WORK/agent-a mounted read-write
+- private Codex authentication stored in a Docker named volume
+- container root filesystem read-only
+- Linux capabilities dropped
+- no-new-privileges enabled
+- model-generated write boundary tested successfully 3/3
+
+[CONFIRMED LIMITATION]
+
+The Codex internal Linux sandbox based on bundled bwrap could not
+operate correctly inside the current restricted container.
+
+Therefore:
+
+Docker is currently the effective external isolation boundary.
+
+The internal Codex sandbox is NOT being treated as the security
+boundary.
+
+[SECURITY NOTE]
+
+The Codex execution path that bypasses its internal approvals and
+sandbox must only be considered acceptable while the external
+Docker boundary is present and verified.
+
+
+2. ANTIGRAVITY / AGENT-B
+------------------------
+
+[CONFIRMED]
+
+Antigravity CLI:
+
+- OAuth authentication works
+- web research works
+- noninteractive execution works
+- JSON output works
+- independent conversations work
+- local research runner passed 3/3
+
+Approved runner SHA256:
+
+7D8A7B8AD5D04E093866F28F878C430E4623184A81A2CC923E7C480199BF6708
+
+
+3. ANTIGRAVITY JSON SCHEMA FAILURE
+----------------------------------
+
+[ERROR]
+
+Initial runner attempted to pass JSON Schema inline through
+Windows PowerShell 5.1.
+
+Observed error:
+
+invalid --json-schema:
+schema is not valid JSON:
+invalid character 't' looking for beginning of object key string
+
+[FIX]
+
+The runner was changed so that:
+
+1. JSON Schema is written to a temporary file.
+2. Antigravity receives the schema file path.
+3. native stderr is captured without losing LASTEXITCODE.
+4. ErrorActionPreference is restored afterwards.
+5. the temporary schema file is removed in finally.
+
+The corrected runner subsequently passed 3/3.
+
+
+4. ANTIGRAVITY SANDBOX RUNTIME
+------------------------------
+
+[CONFIRMED]
+
+agy --sandbox successfully executes with:
+
+- existing OAuth authentication
+- model execution
+- JSON output
+
+Runtime probe:
+
+exit code: 0
+status: SUCCESS
+
+
+5. ANTIGRAVITY WRITE PROBE
+--------------------------
+
+[OBSERVED]
+
+A controlled write attempt was made inside a disposable temporary
+workspace.
+
+Antigravity attempted a PowerShell Set-Content operation.
+
+The Antigravity permission layer rejected the operation before the
+command executed.
+
+Observed result:
+
+status: ERROR
+exit code: 1
+
+Relevant error:
+
+permission check failed for command "Set-Content ..."
+user denied permission to run command
+
+Host verification:
+
+allowed output file: NOT CREATED
+outside output file: NOT CREATED
+
+[CONCLUSION]
+
+This proves that the permission layer blocked that write operation.
+
+It does NOT prove a filesystem sandbox boundary because the command
+was stopped before the filesystem operation executed.
+
+
+6. ANTIGRAVITY READ PROBE
+-------------------------
+
+[CONFIRMED OBSERVATION]
+
+A read-only test used two disposable directories.
+
+Representation:
+
+%TEMP%
+|
++-- AGY_ALLOWED_<id>
+|   +-- input.txt
+|
++-- AGY_FORBIDDEN_<id>
+    +-- input.txt
+
+The Antigravity process was started with its working directory
+inside AGY_ALLOWED_<id>.
+
+Observed result:
+
+file inside working directory:
+READ SUCCESSFUL
+
+file in sibling directory outside working directory:
+READ SUCCESSFUL
+
+status:
+SUCCESS
+
+exit code:
+0
+
+[SECURITY CONCLUSION]
+
+The tested use of:
+
+agy --sandbox
+
+did NOT establish a read boundary limited to the current working
+directory.
+
+Therefore --sandbox alone must NOT currently be considered
+sufficient filesystem isolation for agent-b.
+
+
+7. CURRENT AGENT-B SECURITY STATUS
+----------------------------------
+
+Runner:
+CONFIRMED 3/3
+
+Sandbox runtime:
+CONFIRMED
+
+Write behavior:
+permission layer blocked tested write
+
+Workspace read boundary:
+NOT PRESENT IN THE TESTED CONFIGURATION
+
+Filesystem isolation:
+NOT_YET_VALIDATED
+
+Final isolated agent-b runtime:
+PENDING

@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T14:40:24Z
+
+Title:
+Antigravity real HUB mount policy preflight passed
+
+Component:
+Antigravity agent-b Docker mount policy
+
+Category:
+Mount policy preflight
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The proposed real AI_RESEARCH_HUB mount policy passed a read-only preflight before any real HUB mount was created.
+
+
+EVIDENCE
+--------
+
+All six approved source paths existed, all eight forbidden paths were absent from the proposed mount list, and RESEARCH_PROTOCOL.md retained the previously approved SHA256 B334A38592A68A1606886828F9C6482EEDA6FD112197B43156E3411833206173.
+
+
+SECURITY IMPACT
+---------------
+
+The mount policy is ready for controlled runtime validation but is not yet approved for production use.
+
+
+REMEDIATION
+-----------
+
+Validate the real mount behavior three times before creating the permanent Antigravity agent-b compose configuration.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

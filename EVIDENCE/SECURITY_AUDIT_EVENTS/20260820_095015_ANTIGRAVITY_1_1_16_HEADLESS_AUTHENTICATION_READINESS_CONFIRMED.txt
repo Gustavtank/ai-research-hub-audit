@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:50:15Z
+
+Title:
+Antigravity 1.1.16 headless authentication readiness confirmed
+
+Component:
+Antigravity agent-b Docker authentication
+
+Category:
+Authentication readiness
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The frozen Antigravity 1.1.16 candidate successfully entered its headless OAuth flow inside the hardened Docker container.
+
+
+EVIDENCE
+--------
+
+The CLI presented an authorization URL, accepted authorization-code input, waited for authentication, and timed out normally because no credentials were supplied. No D-Bus, keyring, filesystem or directory-permission errors occurred.
+
+
+SECURITY IMPACT
+---------------
+
+Persistent OAuth state can now be tested without mounting AI_RESEARCH_HUB.
+
+
+REMEDIATION
+-----------
+
+Create a private Docker named volume for Antigravity state, authenticate interactively, then validate credential persistence three times before allowing any HUB mounts.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

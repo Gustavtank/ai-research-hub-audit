@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:27:38Z
+
+Title:
+Antigravity headless read permission was auto-denied and canceled status returned with zero exit code
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Permission enforcement
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The filesystem probe did not reach the Docker boundary because Antigravity required read_file permission and headless mode could not prompt, causing the tool request to be automatically denied.
+
+
+EVIDENCE
+--------
+
+The CLI returned JSON status CANCELED and reported that read_file permission was required and auto-denied in headless mode. The process nevertheless returned ExitCode 0.
+
+
+SECURITY IMPACT
+---------------
+
+Previous token-negative agent probes cannot validate Docker filesystem isolation. Future runners must inspect structured status and expected output instead of relying on process exit code alone.
+
+
+REMEDIATION
+-----------
+
+Use a disposable copy of authenticated state to test narrowly scoped read_file permissions while leaving the original authentication volume untouched.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

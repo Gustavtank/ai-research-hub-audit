@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:54:27Z
+
+Title:
+Antigravity configuration file discovery found no explicit security policy file
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Security configuration discovery
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Filename-only discovery under the Antigravity CLI data directory found three configuration-related candidates: built-in JSON configuration documentation, a default-project cache file, and settings.json.
+
+
+EVIDENCE
+--------
+
+The previously inspected settings.json did not expose security-related properties. The default-project cache was intentionally not opened because its contents were not required for this investigation.
+
+
+SECURITY IMPACT
+---------------
+
+No explicit permission, sandbox or security-policy file has yet been identified. Filesystem isolation remains NOT_YET_VALIDATED.
+
+
+REMEDIATION
+-----------
+
+Inspect only the built-in configuration documentation for references to permissions, sandbox, storage locations and project configuration before probing additional files.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

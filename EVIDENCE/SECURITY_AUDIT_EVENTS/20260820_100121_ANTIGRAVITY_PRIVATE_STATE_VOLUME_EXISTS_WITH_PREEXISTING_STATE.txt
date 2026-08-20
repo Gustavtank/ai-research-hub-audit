@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:01:21Z
+
+Title:
+Antigravity private state volume exists with preexisting state
+
+Component:
+Antigravity agent-b Docker authentication
+
+Category:
+Persistent state inspection
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+The private Docker volume for agent-b was confirmed to have the expected label and ownership, but it is not empty.
+
+
+EVIDENCE
+--------
+
+Volume driver is local, scope is local, role label is antigravity-agent-b-state, root ownership is 1000:1000, mode is 755, and metadata-only inspection counted 21 entries.
+
+
+SECURITY IMPACT
+---------------
+
+The volume may already contain Antigravity runtime or authentication state. Its contents must not be overwritten or inspected directly.
+
+
+REMEDIATION
+-----------
+
+Perform a functional authentication probe using the volume without HUB mounts and without reading credential files.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

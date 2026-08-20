@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:53:25Z
+
+Title:
+Antigravity security properties absent from inspected settings file
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Security configuration discovery
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Recursive property-name discovery in the inspected Antigravity settings.json found zero properties matching sandbox, permission, access, workspace, approval, security or tool.
+
+
+EVIDENCE
+--------
+
+Matching properties: 0. Only property names and types were inspected. No configuration values, credentials or paths were exposed.
+
+
+SECURITY IMPACT
+---------------
+
+The effective Antigravity security policy is stored elsewhere, generated dynamically, or enforced outside this settings file. Filesystem isolation remains NOT_YET_VALIDATED.
+
+
+REMEDIATION
+-----------
+
+Discover candidate security and configuration files using filenames and metadata only before reading any content.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

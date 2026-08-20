@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:55:48Z
+
+Title:
+Antigravity built-in JSON configuration documentation does not identify security policy storage
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Security configuration discovery
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+The built-in json_configs.md documentation was inspected for sandbox, permission, security, config, project, workspace, storage, settings and policy references.
+
+
+EVIDENCE
+--------
+
+Sixteen matching lines described customization configuration files, .agents, global config roots, schemas, inheritance and workspace-relative paths. No inspected line identified effective sandbox or permission policy storage.
+
+
+SECURITY IMPACT
+---------------
+
+The location of the effective Antigravity filesystem and permission policy remains unknown. Filesystem isolation remains NOT_YET_VALIDATED.
+
+
+REMEDIATION
+-----------
+
+Search only filesystem metadata for structured configuration stores such as SQLite, DB, LevelDB, JSONL, protobuf or binary state before reading any candidate content.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

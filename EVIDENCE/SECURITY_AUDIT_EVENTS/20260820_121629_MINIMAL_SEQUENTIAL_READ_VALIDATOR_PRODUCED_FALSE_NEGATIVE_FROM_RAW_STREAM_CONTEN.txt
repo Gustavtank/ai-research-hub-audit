@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T15:16:29Z
+
+Title:
+Minimal sequential read validator produced false negative from raw stream content check
+
+Component:
+Antigravity agent-b test harness
+
+Category:
+Validation logic
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The minimal sequential read execution reached all four expected view_file targets in the correct order and terminated successfully, but the validator incorrectly required synthetic file contents to appear in the raw stream-json text.
+
+
+EVIDENCE
+--------
+
+The first view_file indices were PROTOCOL 4, TASK 7, CONFIG 10, and LOG 13. Order validation was true, no unexpected tool was detected, process exit code was zero, terminal status was SUCCESS, the requested terminal response was correct, and terminal error was empty. Raw token searches were false for all four files.
+
+
+SECURITY IMPACT
+---------------
+
+The agent behavior appears correct, but this execution cannot count toward the three required validations because the content-receipt oracle was not reliable.
+
+
+REMEDIATION
+-----------
+
+Replace raw stream token observation with an end-to-end proof requiring the model to reproduce unpredictable synthetic values read from all four files while keeping those values hidden from console output.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

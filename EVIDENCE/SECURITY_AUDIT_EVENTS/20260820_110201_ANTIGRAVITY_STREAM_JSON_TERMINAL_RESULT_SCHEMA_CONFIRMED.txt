@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T14:02:01Z
+
+Title:
+Antigravity stream-json terminal result schema confirmed
+
+Component:
+Antigravity agent-b structured output
+
+Category:
+Structured event schema
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The terminal stream-json event schema for Antigravity 1.1.16 was identified.
+
+
+EVIDENCE
+--------
+
+The final structured event exposes top-level event and result properties. The result object contains conversation_id, status, response, error, duration_seconds, num_turns and usage.
+
+
+SECURITY IMPACT
+---------------
+
+Future validation scripts can reliably inspect structured terminal success instead of relying on native process exit codes alone.
+
+
+REMEDIATION
+-----------
+
+Use the last structured event containing result.status and validate both status SUCCESS and the expected final response.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

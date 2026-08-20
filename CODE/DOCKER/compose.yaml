@@ -1,0 +1,75 @@
+name: ai-research-hub-test
+
+services:
+
+  agent-a:
+    image: alpine:latest
+    container_name: ai-research-agent-a-test
+    command: ["sh", "-c", "echo '[agent-a] ready'; sleep infinity"]
+    working_dir: /hub
+    network_mode: none
+    read_only: true
+    restart: "no"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    volumes:
+      - type: bind
+        source: C:/AI_RESEARCH_HUB
+        target: /hub
+        read_only: true
+      - type: bind
+        source: C:/AI_RESEARCH_HUB/RESEARCH/WORK/agent-a
+        target: /hub/RESEARCH/WORK/agent-a
+        read_only: false
+
+  agent-b:
+    image: alpine:latest
+    container_name: ai-research-agent-b-test
+    command: ["sh", "-c", "echo '[agent-b] ready'; sleep infinity"]
+    working_dir: /hub
+    network_mode: none
+    read_only: true
+    restart: "no"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    volumes:
+      - type: bind
+        source: C:/AI_RESEARCH_HUB
+        target: /hub
+        read_only: true
+      - type: bind
+        source: C:/AI_RESEARCH_HUB/RESEARCH/WORK/agent-b
+        target: /hub/RESEARCH/WORK/agent-b
+        read_only: false
+
+  agent-c:
+    image: alpine:latest
+    container_name: ai-research-agent-c-test
+    command: ["sh", "-c", "echo '[agent-c] ready'; sleep infinity"]
+    working_dir: /hub
+    network_mode: none
+    read_only: true
+    restart: "no"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    volumes:
+      - type: bind
+        source: C:/AI_RESEARCH_HUB
+        target: /hub
+        read_only: true
+      - type: bind
+        source: C:/AI_RESEARCH_HUB/RESEARCH/WORK/agent-c
+        target: /hub/RESEARCH/WORK/agent-c
+        read_only: false

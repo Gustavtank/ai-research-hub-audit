@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:59:42Z
+
+Title:
+Antigravity state volume inspection probe failed because of Windows quoting
+
+Component:
+Security audit tooling
+
+Category:
+Audit tooling error
+
+Status:
+ERROR
+
+
+SUMMARY
+-------
+
+The read-only Antigravity state-volume inspection did not complete because of two command-construction issues in the PowerShell probe.
+
+
+EVIDENCE
+--------
+
+Docker Go-template parsing failed on the hyphenated label key, and the multiline sh -lc command was malformed by native argument quoting and ended with a shell syntax error.
+
+
+SECURITY IMPACT
+---------------
+
+No conclusion about the volume label, ownership, or content count can be drawn from the failed probe. The volume itself was not modified.
+
+
+REMEDIATION
+-----------
+
+Repeat the inspection using docker volume inspect parsed with ConvertFrom-Json and direct stat/find commands without shell quoting.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

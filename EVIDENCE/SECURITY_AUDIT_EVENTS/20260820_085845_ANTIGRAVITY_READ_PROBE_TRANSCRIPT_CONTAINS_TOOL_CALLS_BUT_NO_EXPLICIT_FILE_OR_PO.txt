@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:58:45Z
+
+Title:
+Antigravity read probe transcript contains tool calls but no explicit file or PowerShell tool names
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Filesystem isolation investigation
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Sanitized metadata inspection of the known external-read probe transcript found no textual occurrences of read_file, write_file, Get-Content, Set-Content or PowerShell.
+
+
+EVIDENCE
+--------
+
+Keyword counts were read_file=0, write_file=0, Get-Content=0, Set-Content=0, powershell=0 and command=1. Top-level JSON properties included tool_calls.
+
+
+SECURITY IMPACT
+---------------
+
+The mechanism responsible for reading outside the working directory is still unidentified. Filesystem isolation remains NOT_YET_VALIDATED.
+
+
+REMEDIATION
+-----------
+
+Inspect only the schema and property names contained inside tool_calls without displaying arguments or raw values.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

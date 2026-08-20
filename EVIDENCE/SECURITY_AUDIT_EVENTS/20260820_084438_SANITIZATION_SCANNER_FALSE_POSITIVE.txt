@@ -1,0 +1,65 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:44:38Z
+
+Component:
+SECURITY_AUDIT sanitization scanner
+
+Category:
+Audit tooling
+
+Status:
+CONFIRMED TOOLING FALSE POSITIVE
+
+
+OBSERVATION
+-----------
+
+The initial sanitization scan reported one Windows user-path finding
+inside README.txt.
+
+The matched text was a documented placeholder example and did not
+contain a real username, credential or secret.
+
+Sanitized form represented conceptually as:
+
+user profile path -> %USERPROFILE%\...
+
+
+ROOT CAUSE
+----------
+
+The original regex treated placeholder text as though it were an
+actual Windows username.
+
+
+SECURITY IMPACT
+---------------
+
+No personal data leak was demonstrated.
+
+No credential leak was demonstrated.
+
+The issue was limited to scanner precision.
+
+
+REMEDIATION
+-----------
+
+The scanner regex was changed so that placeholder values beginning
+with "<" are excluded from Windows user-path detection.
+
+The current Windows profile name is now detected dynamically during
+the scan rather than being hard-coded into the scanner logic.
+
+
+CLASSIFICATION
+--------------
+
+Security data exposure:
+NOT OBSERVED
+
+Audit-tool false positive:
+CONFIRMED

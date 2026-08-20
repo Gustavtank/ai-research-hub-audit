@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:49:37Z
+
+Title:
+Antigravity help capability probe interrupted by PowerShell native stderr handling
+
+Component:
+Security audit tooling
+
+Category:
+PowerShell native command handling
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The Antigravity CLI help probe was interrupted before capability analysis because Windows PowerShell promoted native stderr output to NativeCommandError while ErrorActionPreference was Stop.
+
+
+EVIDENCE
+--------
+
+The probe stopped immediately after the CLI emitted its Usage text, so no reliable conclusion about supported flags was produced.
+
+
+SECURITY IMPACT
+---------------
+
+Antigravity CLI capability flags remain unverified.
+
+
+REMEDIATION
+-----------
+
+Capture native stdout and stderr under ErrorActionPreference Continue, preserve LASTEXITCODE immediately, and analyze the resulting help text afterward.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

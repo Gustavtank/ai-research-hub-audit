@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:00:00Z
+
+Title:
+Tool calls schema probe failed because of PowerShell scope bug
+
+Component:
+Security audit tooling
+
+Category:
+Audit tooling error
+
+Status:
+ERROR
+
+
+SUMMARY
+-------
+
+The tool_calls schema probe failed locally before completing because the collector variable was initialized in the current block scope but mutated through the PowerShell script scope.
+
+
+EVIDENCE
+--------
+
+Observed error: PSObject does not contain a method named op_Addition. The failure occurred while attempting to append to script-scoped PropertyResults.
+
+
+SECURITY IMPACT
+---------------
+
+No conclusion about Antigravity filesystem isolation can be drawn from this failed probe.
+
+
+REMEDIATION
+-----------
+
+Repeat the probe using an explicitly passed List[object] collector and avoid script-scoped mutable variables.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

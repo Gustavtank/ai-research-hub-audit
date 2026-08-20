@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T17:59:44Z
+
+Title:
+Antigravity ephemeral brain isolation V2 test one passed
+
+Component:
+Antigravity agent-b runtime state isolation
+
+Category:
+Ephemeral brain isolation
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The first Ephemeral Brain Isolation V2 validation passed with persistent Antigravity state mounted read-only and runtime brain state isolated in ephemeral tmpfs.
+
+
+EVIDENCE
+--------
+
+The persistent .gemini volume rejected writes, the brain tmpfs was writable, the brain marker did not persist after container exit, and no persistent probe was created. Antigravity remained authenticated, read the allowed local file, used only official Docker web research, did not inspect private persistent .gemini state, used no unexpected tool or file target, returned the local proof correctly, completed with SUCCESS, and result.error was empty.
+
+
+SECURITY IMPACT
+---------------
+
+This is one valid proof that persistent Antigravity state can remain read-only while transient runtime state is separated into an ephemeral brain tmpfs without breaking the tested research workflow.
+
+
+REMEDIATION
+-----------
+
+Repeat the same V2 validation twice with fresh synthetic values before approval.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

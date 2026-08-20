@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:23:43Z
+
+Title:
+Docker Desktop per-user installation discovered
+
+Component:
+Docker runtime discovery
+
+Category:
+Environment discovery
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+Docker Desktop is installed per-user under LocalAppData Programs and exposes the docker desktop CLI subcommand.
+
+
+EVIDENCE
+--------
+
+Docker Desktop version 4.86.0 was found in the Windows uninstall registry. docker.exe resides under the per-user DockerDesktop installation. Start Menu registration exists and docker desktop --help succeeds.
+
+
+SECURITY IMPACT
+---------------
+
+The previous launcher failure was caused by incorrect assumed installation paths, not by a missing Docker Desktop installation.
+
+
+REMEDIATION
+-----------
+
+Use docker desktop start instead of hard-coded executable paths, then validate the Docker engine three times.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

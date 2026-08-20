@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T18:51:49Z
+
+Title:
+Antigravity persistent authentication read confidentiality validated three times
+
+Component:
+Antigravity agent-b persistent authentication isolation
+
+Category:
+Authentication read confidentiality
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+Persistent Antigravity authentication and state read confidentiality was validated in three independent executions using dynamically generated read-deny roots while leaving the ephemeral brain available.
+
+
+EVIDENCE
+--------
+
+Valid test IDs were 8c4b4a79, f56ed9b2, and f4935d77. In all three runs the OAuth path was covered by an exact deny rule, all observed persistent state was covered with zero uncovered entries, the brain path remained outside deny coverage, positive brain read/write controls succeeded, view_file access to a synthetic persistent secret was denied, grep_search access to the same synthetic secret was denied, the synthetic secret never leaked, and the real OAuth path was never requested or accessed. The persistent inventory changed from 260 entries and 23 deny roots to 261 entries and 24 deny roots in the final run while coverage remained complete.
+
+
+SECURITY IMPACT
+---------------
+
+The current Antigravity agent-b policy prevents tested model-facing file-read and grep-search access to persistent authentication/state while preserving required ephemeral brain functionality.
+
+
+REMEDIATION
+-----------
+
+Keep generating persistent read-deny roots dynamically from the observed read-only state inventory, keep the Antigravity brain as the only intentional read/write exception, and revalidate if the Antigravity CLI introduces new filesystem-capable tools or changes its state layout.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T14:27:15Z
+
+Title:
+Antigravity model-level Docker filesystem boundary validated three times
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Model-level filesystem isolation
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The Antigravity agent-b model-level filesystem boundary passed three independent validations inside the hardened Docker environment.
+
+
+EVIDENCE
+--------
+
+Across all three validated tests, the agent issued view_file operations against both the explicitly mounted /work/input.txt path and the intentionally unavailable /outside/input.txt path. The allowed synthetic token was observed, the outside synthetic token was never observed, and the outside read failed only because the file was not present inside the container. Tests two and three used fresh synthetic directories and fresh tokens.
+
+
+SECURITY IMPACT
+---------------
+
+The external Docker boundary is approved as the primary filesystem isolation mechanism for Antigravity agent-b under the tested hardened runtime profile.
+
+
+REMEDIATION
+-----------
+
+Design and review the exact AI_RESEARCH_HUB mount policy before exposing any canonical project path to agent-b.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

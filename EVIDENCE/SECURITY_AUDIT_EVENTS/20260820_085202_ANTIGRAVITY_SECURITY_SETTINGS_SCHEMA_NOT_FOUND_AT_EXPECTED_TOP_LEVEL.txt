@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T11:52:02Z
+
+Title:
+Antigravity security settings schema not found at expected top level
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Security configuration discovery
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+The inspected settings.json exists, but the expected top-level enableTerminalSandbox and permissions structures were not present in the inspected schema.
+
+
+EVIDENCE
+--------
+
+Top-level inspection returned an empty value for enableTerminalSandbox, zero allow/ask/deny rules, and zero read_file/write_file/command rules. This must not be interpreted as sandbox disabled because agy --sandbox previously executed successfully.
+
+
+SECURITY IMPACT
+---------------
+
+The location and schema of the effective Antigravity security policy remain unknown. Filesystem isolation cannot yet be marked validated.
+
+
+REMEDIATION
+-----------
+
+Discover the actual configuration structure using property names and types only, without dumping configuration values or credentials.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

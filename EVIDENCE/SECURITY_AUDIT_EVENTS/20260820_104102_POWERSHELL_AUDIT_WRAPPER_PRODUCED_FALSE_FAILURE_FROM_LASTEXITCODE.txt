@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:41:02Z
+
+Title:
+PowerShell audit wrapper produced false failure from LASTEXITCODE
+
+Component:
+Security audit tooling
+
+Category:
+PowerShell control flow
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+A wrapper incorrectly treated LASTEXITCODE as the success status of a PowerShell script invocation.
+
+
+EVIDENCE
+--------
+
+ADD_SECURITY_AUDIT_EVENT.ps1 explicitly reported PASS and produced a valid audit file and SHA256, but the wrapper subsequently entered its failure branch because LASTEXITCODE contained a nonzero native-process value.
+
+
+SECURITY IMPACT
+---------------
+
+Using LASTEXITCODE after PowerShell script invocations can create false failures and prematurely stop multi-step audit workflows.
+
+
+REMEDIATION
+-----------
+
+Use PowerShell exception handling or the immediate PowerShell success state instead of LASTEXITCODE when validating PowerShell script invocations.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

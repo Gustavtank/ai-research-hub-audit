@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:55:29Z
+
+Title:
+Antigravity 1.1.16 structured stream and skip-permission capabilities confirmed
+
+Component:
+Antigravity agent-b Docker runtime
+
+Category:
+CLI capabilities
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The frozen Antigravity 1.1.16 candidate exposes the structured-output and temporary permission-override capabilities required for model-level filesystem-boundary testing.
+
+
+EVIDENCE
+--------
+
+agy --help returned ExitCode 0 and explicitly listed --dangerously-skip-permissions, --output-format with stream-json support, and --add-dir. No explicit non-workspace CLI flag appeared.
+
+
+SECURITY IMPACT
+---------------
+
+Model tool calls can now be observed through structured stream events while internal permission prompts are temporarily removed as a confounding factor.
+
+
+REMEDIATION
+-----------
+
+Use these capabilities only with disposable authenticated state and synthetic filesystem data inside the already validated Docker boundary.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

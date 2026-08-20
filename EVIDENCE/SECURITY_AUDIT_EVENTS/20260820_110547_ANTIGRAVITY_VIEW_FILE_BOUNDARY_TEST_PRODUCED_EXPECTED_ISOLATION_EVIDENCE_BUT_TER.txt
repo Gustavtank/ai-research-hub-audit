@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T14:05:47Z
+
+Title:
+Antigravity view_file boundary test produced expected isolation evidence but terminal status was ERROR
+
+Component:
+Antigravity agent-b Docker isolation
+
+Category:
+Model-level filesystem isolation
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The model-level boundary test demonstrated both permitted and blocked file-read attempts, but the terminal structured status was ERROR.
+
+
+EVIDENCE
+--------
+
+The run returned ExitCode 0, eleven structured events, four tool_info objects, two view_file references to /work/input.txt and two to /outside/input.txt. The allowed token was observed, the outside token was not observed, and the final response matched the expected ALLOWED_READ value plus OUTSIDE_READ=BLOCKED.
+
+
+SECURITY IMPACT
+---------------
+
+The filesystem behavior is consistent with successful isolation, but the test cannot yet be promoted because it is not known whether terminal ERROR simply represents the intentionally failed outside file read.
+
+
+REMEDIATION
+-----------
+
+Inspect only the sanitized terminal result.error metadata from Test ID c25ab347 before changing the pass criteria.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

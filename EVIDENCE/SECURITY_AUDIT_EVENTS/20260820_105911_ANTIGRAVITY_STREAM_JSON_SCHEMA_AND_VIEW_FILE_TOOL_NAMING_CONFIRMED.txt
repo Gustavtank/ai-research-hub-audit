@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T13:59:11Z
+
+Title:
+Antigravity stream-json schema and view_file tool naming confirmed
+
+Component:
+Antigravity agent-b structured output
+
+Category:
+Structured event schema
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+The Antigravity 1.1.16 stream-json diagnostic identified the actual file-reading tool name and terminal event shape.
+
+
+EVIDENCE
+--------
+
+Eleven structured events and four tool_info objects were observed. All file-reading tool_info objects were named view_file. Two referenced /work/input.txt and two referenced /outside/input.txt. Top-level events did not expose a type property; the final event exposed event and result properties.
+
+
+SECURITY IMPACT
+---------------
+
+The previous parser assumptions were incorrect and can now be corrected using observed runtime evidence.
+
+
+REMEDIATION
+-----------
+
+Inspect only nested property names under event and result to locate the terminal status, then rerun the model-level boundary test with the corrected parser.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

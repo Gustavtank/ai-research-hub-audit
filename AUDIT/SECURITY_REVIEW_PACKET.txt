@@ -1,0 +1,145 @@
+AI_RESEARCH_HUB - SECURITY REVIEW PACKET
+========================================
+
+Snapshot UTC:
+2026-08-20T11:42:09Z
+
+This file is intentionally sanitized for independent AI or human
+security review.
+
+No credentials, tokens, personal names or email addresses should
+be present.
+
+
+ARCHITECTURE SUMMARY
+--------------------
+
+agent-a:
+Codex CLI
+
+Current isolation:
+external Docker security boundary
+
+agent-b:
+Antigravity CLI
+
+Current isolation:
+NOT YET VALIDATED
+
+
+CONFIRMED CODEX STATE
+---------------------
+
+- HUB defaults to read-only inside agent-a container.
+- agent-a receives RW access only to its own WORK directory.
+- canonical KNOWLEDGE and other agent workspaces rejected writes.
+- model-generated boundary tests passed 3/3.
+- private authentication persists in a Docker named volume.
+- root filesystem is read-only.
+- capabilities are dropped.
+- no-new-privileges is enabled.
+
+Known limitation:
+
+The internal Codex Linux/bwrap sandbox is incompatible with the
+current restricted container configuration.
+
+The external Docker boundary therefore remains the effective
+security boundary.
+
+
+CONFIRMED ANTIGRAVITY STATE
+---------------------------
+
+- OAuth works.
+- web research works.
+- noninteractive execution works.
+- structured JSON works.
+- research runner passed 3/3.
+- agy --sandbox runtime works.
+
+
+ANTIGRAVITY SECURITY FINDING
+----------------------------
+
+Write probe:
+
+A Set-Content operation was rejected by the Antigravity permission
+layer before execution.
+
+Therefore this test did not establish a filesystem boundary.
+
+Read probe:
+
+Antigravity was started inside:
+
+%TEMP%\AGY_ALLOWED_<id>
+
+It successfully read:
+
+%TEMP%\AGY_ALLOWED_<id>\input.txt
+
+and also:
+
+%TEMP%\AGY_FORBIDDEN_<id>\input.txt
+
+The second directory was outside the current working directory.
+
+Conclusion:
+
+The tested use of agy --sandbox did not provide a workspace-limited
+read boundary.
+
+
+CURRENT TRUST DECISION
+----------------------
+
+Codex agent-a Docker boundary:
+CONFIRMED
+
+Antigravity research runner:
+CONFIRMED 3/3
+
+Antigravity filesystem isolation:
+NOT_YET_VALIDATED
+
+Antigravity safe access to canonical HUB:
+NOT APPROVED
+
+
+QUESTIONS FOR INDEPENDENT REVIEWER
+----------------------------------
+
+1. Is the Codex external Docker security boundary designed
+   sufficiently for an agent using its internal sandbox bypass?
+
+2. What additional Docker or OS isolation should be applied to
+   Antigravity before it can read AI_RESEARCH_HUB content?
+
+3. Does Antigravity --sandbox provide filesystem path restrictions,
+   or is it primarily a terminal-command containment mechanism?
+
+4. Is a separate container identity preferable to host execution
+   for agent-b?
+
+5. How should OAuth state be persisted without exposing credentials
+   to the HUB?
+
+6. Which directories should be RO and which single workspace should
+   be RW for agent-b?
+
+7. What adversarial tests should be run before marking filesystem
+   isolation CONFIRMED?
+
+8. Are there any privilege-escalation or host-path risks that the
+   current test plan has not covered?
+
+
+REVIEW RULE
+-----------
+
+Treat only items explicitly marked CONFIRMED or CONFIRMED
+OBSERVATION as demonstrated behavior.
+
+Do not treat PENDING, INFERENCE or NOT_YET_VALIDATED items as
+verified facts.

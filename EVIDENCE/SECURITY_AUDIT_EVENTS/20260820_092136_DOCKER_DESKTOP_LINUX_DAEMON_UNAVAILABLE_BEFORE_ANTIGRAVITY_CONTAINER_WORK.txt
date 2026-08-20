@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:21:36Z
+
+Title:
+Docker Desktop Linux daemon unavailable before Antigravity container work
+
+Component:
+Docker runtime
+
+Category:
+Environment readiness
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Docker CLI and Docker Compose were available, but the Docker Desktop Linux engine daemon was not running.
+
+
+EVIDENCE
+--------
+
+docker version returned the client version but no server version. Docker image and container queries failed because the dockerDesktopLinuxEngine named pipe was unavailable.
+
+
+SECURITY IMPACT
+---------------
+
+No Antigravity container build or isolation test can begin until the Docker daemon is available.
+
+
+REMEDIATION
+-----------
+
+Start Docker Desktop and validate the Docker runtime successfully three times before creating any Antigravity Docker artifacts.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

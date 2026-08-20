@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:39:08Z
+
+Title:
+Docker runtime validated before Antigravity isolation work
+
+Component:
+Docker runtime
+
+Category:
+Environment readiness
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+Docker Desktop Linux engine was started successfully and the Docker runtime passed three consecutive validation checks.
+
+
+EVIDENCE
+--------
+
+All three docker version checks returned Client 29.7.2 and Server 29.7.2 with successful exit status.
+
+
+SECURITY IMPACT
+---------------
+
+External container isolation work for agent-b can proceed.
+
+
+REMEDIATION
+-----------
+
+Build the Antigravity test image without mounting AI_RESEARCH_HUB or host credentials.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

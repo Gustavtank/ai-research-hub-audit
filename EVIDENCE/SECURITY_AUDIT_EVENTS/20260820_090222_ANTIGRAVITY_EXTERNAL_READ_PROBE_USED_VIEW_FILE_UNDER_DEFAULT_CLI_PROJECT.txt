@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:02:22Z
+
+Title:
+Antigravity external read probe used view_file under default CLI project
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Filesystem isolation investigation
+
+Status:
+OBSERVED
+
+
+SUMMARY
+-------
+
+Transcript inspection confirmed that both reads in the controlled external-read probe were performed by the structured view_file tool.
+
+
+EVIDENCE
+--------
+
+Exactly two tool calls were present and both had the tool name view_file. Arguments and paths were not displayed. Official documentation states that plan mode uses view_file as a read-only inspection tool.
+
+
+SECURITY IMPACT
+---------------
+
+The previous probe demonstrated external reading under the active default CLI project, but did not establish the behavior of an explicitly scoped single-folder Project.
+
+
+REMEDIATION
+-----------
+
+Repeat the read-boundary test in a disposable new Antigravity Project with only the allowed directory added as a workspace folder.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

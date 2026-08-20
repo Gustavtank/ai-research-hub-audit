@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:04:48Z
+
+Title:
+Antigravity explicit project filesystem read boundary failed
+
+Component:
+Antigravity CLI agent-b
+
+Category:
+Filesystem isolation
+
+Status:
+CONFIRMED
+
+
+SUMMARY
+-------
+
+A controlled single-folder Project test demonstrated successful reading of a file located in a sibling directory outside the Project.
+
+
+EVIDENCE
+--------
+
+The run used a new Project, added only the allowed directory, enabled sandbox mode, used plan mode, prohibited terminal commands, and requested read-only inspection. The agent returned the exact synthetic token stored only in the external sibling file and exited successfully.
+
+
+SECURITY IMPACT
+---------------
+
+Project scoping, add-dir and sandbox cannot be accepted as the primary filesystem security boundary for agent-b. Host filesystem isolation is NOT APPROVED.
+
+
+REMEDIATION
+-----------
+
+Move agent-b into an external isolation boundary with explicit filesystem mounts. Retain Antigravity internal permissions as defense in depth.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

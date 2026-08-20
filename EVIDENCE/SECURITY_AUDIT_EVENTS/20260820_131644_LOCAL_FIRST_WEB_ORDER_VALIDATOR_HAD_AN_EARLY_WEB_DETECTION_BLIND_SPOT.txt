@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T16:16:44Z
+
+Title:
+Local first web order validator had an early web detection blind spot
+
+Component:
+Antigravity agent-b adversarial test harness
+
+Category:
+Validation logic
+
+Status:
+TEST
+
+
+SUMMARY
+-------
+
+The first local-first web-order execution showed the expected PROTOCOL, TASK, CONFIG, LOG, Docker-web sequence and completed successfully, but the validator could miss an unrelated web or search tool occurring before local evidence.
+
+
+EVIDENCE
+--------
+
+WebBeforeLocal was calculated only from records classified as DOCKER_WEB. The UnexpectedTool check explicitly excluded OTHER records whose tool name matched read_url, web, or search, so an earlier unrelated web operation could theoretically escape detection.
+
+
+SECURITY IMPACT
+---------------
+
+The execution cannot count toward the strict three-run local-first web-order approval even though the observed sequence was correct.
+
+
+REMEDIATION
+-----------
+
+Repeat the test with a strict validator that identifies every web-capable operation, requires all web operations to target official Docker documentation, and checks the earliest web event against the local evidence sequence.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.

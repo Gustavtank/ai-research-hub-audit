@@ -1,0 +1,54 @@
+SECURITY AUDIT EVENT
+====================
+
+Timestamp UTC:
+2026-08-20T12:40:54Z
+
+Title:
+Antigravity Linux installer rejected documented skip flags
+
+Component:
+Antigravity agent-b Docker build
+
+Category:
+Installer compatibility
+
+Status:
+ERROR
+
+
+SUMMARY
+-------
+
+The Antigravity Docker image build failed because the Linux installer rejected the skip-path and skip-aliases parameters.
+
+
+EVIDENCE
+--------
+
+The downloaded installer printed usage supporting only -d/--dir and -h/--help, then returned Unknown parameter: --skip-path. Official documentation currently advertises skip-path and skip-aliases, so observed installer behavior differs from documentation.
+
+
+SECURITY IMPACT
+---------------
+
+The image was not built. No container was started and no HUB data or credentials were exposed.
+
+
+REMEDIATION
+-----------
+
+Pin the installation destination explicitly with the supported --dir option and set PATH through the Dockerfile.
+
+
+AUDIT RULE
+----------
+
+This file contains sanitized technical evidence.
+
+It must not contain personal names, email addresses, passwords,
+OAuth tokens, API keys, cookies or authentication-file contents.
+
+Only observed facts should be marked CONFIRMED or OBSERVED.
+
+Unverified conclusions must remain TEST, INFERENCE or PENDING.
